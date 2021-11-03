@@ -1,0 +1,78 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="ComboBoxUpToggleButton" TargetType="{x:Type ToggleButton}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="0" Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" />
+            <Border x:Name="ContentBorder" Grid.Column="0" CornerRadius="0" Margin="1" Background="#FFFFFF" 
+                    BorderBrush="#FFFFFF" BorderThickness="0,0,1,0" />
+            <Path x:Name="Arrow" Grid.Column="1" Fill="#000000"
+                  VerticalAlignment="Center" Data="M 1 0 L 4 4 L 7 0 Z"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="#CCCCCC" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="#000000" />
+                <Setter TargetName="ContentBorder" Property="BorderBrush" Value="#000000" />
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="#CCCCCC" />
+                <Setter TargetName="ContentBorder" Property="BorderBrush" Value="#000000" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ComboBoxUpTextBox" TargetType="{x:Type TextBox}">
+        <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ComboBoxUpTemplate" TargetType="{x:Type ComboBox}">
+        <Grid>
+            <ToggleButton Name="ToggleButton" Template="{StaticResource ComboBoxUpToggleButton}" Grid.Column="2" Focusable="False" Background="#FFFFFF"
+                          IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press">
+            </ToggleButton>
+            <ContentPresenter Name="ContentSite" IsHitTestVisible="False" Content="{TemplateBinding SelectionBoxItem}"
+                              Margin="3,2,11,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <TextBox x:Name="PART_EditableTextBox" Margin="0,0,11,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsReadOnly="{TemplateBinding IsReadOnly}" SelectionBrush="#000000" BorderBrush="#999999"
+                     Template="{StaticResource ComboBoxUpTextBox}" />
+            <Popup Name="Popup" Placement="Top" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+                <Grid Margin="3,3,0,0" Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                    <Border x:Name="DropDownBorder" Background="#EFEFEF" BorderBrush="#CCCCCC" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" Opacity="0.7" BlurRadius="3" ShadowDepth="3" Direction="130"/>
+                        </Border.Effect>
+                    </Border>
+                    <StackPanel IsItemsHost="True" Margin="2,2,2,2" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                </Grid>
+            </Popup>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger SourceName="Popup" Property="Popup.IsMouseOver" Value="True">
+                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+            </Trigger>
+            <Trigger Property="ComboBox.IsMouseOver" Value="True">
+                <Setter TargetName="PART_EditableTextBox" Property="BorderBrush" Value="#000000"/>
+                <Setter TargetName="ToggleButton" Property="BorderBrush" Value="#000000"/>
+            </Trigger>
+            <Trigger Property="ComboBox.IsEnabled" Value="False">
+                <Setter TargetName="PART_EditableTextBox" Property="Background" Value="#CCCCCC"/>
+                <Setter TargetName="ToggleButton" Property="Background" Value="#CCCCCC"/>
+            </Trigger>
+            <Trigger SourceName="PART_EditableTextBox" Property="TextBox.IsFocused" Value="True">
+                <Setter TargetName="PART_EditableTextBox" Property="BorderBrush" Value="#000000"/>
+                <Setter TargetName="ToggleButton" Property="BorderBrush" Value="#000000"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="ComboBoxUpStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="IsEditable" Value="true"/>
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="Template" Value="{StaticResource ComboBoxUpTemplate}" />
+    </Style>
+</ResourceDictionary>

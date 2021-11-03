@@ -1,0 +1,17 @@
+﻿<Window x:Class="WpfResources.Preview.ProgressBarStylePrev"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ProgressBarStylePrev" Height="300" Width="300">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WpfStyles;component/WpfStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <ProgressBar Width="200" Minimum="0" Maximum="100" Height="10" Value="40" IsIndeterminate="True" Margin="0,0,0,0" />
+        <ProgressBar Width="200" Minimum="0" Maximum="100" Height="10" Value="40" IsIndeterminate="False" Margin="0,50,0,0" />
+        <ProgressBar Width="200" Minimum="0" Maximum="100" Height="10" Value="100" IsIndeterminate="False" Margin="0,100,0,0" />
+    </Grid>
+</Window>

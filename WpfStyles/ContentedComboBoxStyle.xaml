@@ -1,0 +1,219 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/WpfStyles;component/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+        
+    <SolidColorBrush x:Key="TB_Border_Bg_Default" Color="{DynamicResource TextBackgroundColor}"/>
+    <SolidColorBrush x:Key="TB_Border_Bg_Active" Color="{DynamicResource ActiveElementBgColor}"/>
+    <SolidColorBrush x:Key="TB_DelimBorder_Bg_Default" Color="{DynamicResource MainBGColor}"/>
+    <SolidColorBrush x:Key="TB_DelimBorder_Bg_Active" Color="Green"/>
+    <SolidColorBrush x:Key="TB_Arrow_Fill_Default" Color="{DynamicResource InActiveDrawElementFillColor}"/>
+    <SolidColorBrush x:Key="TB_Arrow_Fill_Active" Color="{DynamicResource ActiveDrawElementFillColor}"/>
+
+    <SolidColorBrush x:Key="CB_Border_Border_Default" Color="{DynamicResource InActiveElementBorderColor}"/>
+    <SolidColorBrush x:Key="CB_Border_Border_Active" Color="{DynamicResource ActiveElementBorderColor}"/>
+    <SolidColorBrush x:Key="CB_Border_Bg" Color="{DynamicResource TextBackgroundColor}"/>
+    <SolidColorBrush x:Key="CB_DropDownBorder_Bg" Color="{DynamicResource TextBackgroundColor}"/>
+    <SolidColorBrush x:Key="CB_DropDownBorder_Border" Color="{DynamicResource ActiveElementBorderColor}"/>
+
+    <SolidColorBrush x:Key="CBI_Border_Bg_Default" Color="{DynamicResource TextBackgroundColor}" />
+    <SolidColorBrush x:Key="CBI_Border_Bg_Active" Color="{DynamicResource ActiveElementBorderColor}" />
+
+    <!--Шаблон кнопки открытия выпадающего списка-->
+    <ControlTemplate x:Key="ContentedComboBoxToggleButtonTemplate" TargetType="{x:Type ToggleButton}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="Background.Color"
+                                            To="{Binding Path=Color, Source={StaticResource TB_Border_Bg_Active}}" 
+                                            Duration="0:0:0"/>
+                            <ColorAnimation Storyboard.TargetName="DelimBorder"
+                                            Storyboard.TargetProperty="Background.Color"
+                                            To="{Binding Path=Color, Source={StaticResource TB_DelimBorder_Bg_Active}}" 
+                                            Duration="0:0:0"/>
+                            <ColorAnimation Storyboard.TargetName="Arrow"
+                                            Storyboard.TargetProperty="Fill.Color"
+                                            To="{Binding Path=Color, Source={StaticResource TB_Arrow_Fill_Active}}" 
+                                            Duration="0:0:0"/>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="Background.Color"
+                                            To="{Binding Path=Color, Source={StaticResource TB_Border_Bg_Active}}" 
+                                            Duration="0:0:0"/>
+                            <ColorAnimation Storyboard.TargetName="DelimBorder"
+                                            Storyboard.TargetProperty="Background.Color"
+                                            To="{Binding Path=Color, Source={StaticResource TB_DelimBorder_Bg_Active}}" 
+                                            Duration="0:0:0"/>
+                            <ColorAnimation Storyboard.TargetName="Arrow"
+                                            Storyboard.TargetProperty="Fill.Color"
+                                            To="{Binding Path=Color, Source={StaticResource TB_Arrow_Fill_Active}}" 
+                                            Duration="0:0:0"/>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CheckStates">
+                    <VisualState x:Name="Checked" />
+                    <VisualState x:Name="Unchecked" />
+                    <VisualState x:Name="Indeterminate" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            
+            <Border x:Name="Border"
+                    Grid.ColumnSpan="2"
+                    CornerRadius="2"
+                    Background="{StaticResource TB_Border_Bg_Default}" />
+            <Border x:Name="DelimBorder"
+                    Grid.Column="0"
+                    Background="{StaticResource TB_DelimBorder_Bg_Default}"/>
+            <Path x:Name="Arrow"
+                  Grid.Column="1"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Data="M 0 0 L 4 4 L 8 0 Z" 
+                  Fill="{StaticResource TB_Arrow_Fill_Default}"/>
+        </Grid>
+    </ControlTemplate>
+
+    <!--Шаблон поля для ввода текста-->
+    <ControlTemplate x:Key="ComboBoxTextBoxTemplate" TargetType="{x:Type TextBox}">
+        <Border x:Name="PART_ContentHost"
+                Focusable="False"/>
+    </ControlTemplate>
+
+    <!--Шаблон для элемента выпадающего списка-->
+    <ControlTemplate x:Key="ContentedComboBoxItemTemplate" TargetType="{x:Type ComboBoxItem}">
+        <Border x:Name="Border"
+                Padding="2"                
+                SnapsToDevicePixels="True"
+                Background="{StaticResource CBI_Border_Bg_Default}">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="SelectionStates">
+                    <VisualState x:Name="Unselected" />
+                    <VisualState x:Name="Selected" />
+                    <VisualState x:Name="SelectedUnfocused" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            
+            <ContentPresenter Margin="3" HorizontalAlignment="Left" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource CBI_Border_Bg_Active}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--Стиль элемента выпадающего списка-->
+    <Style x:Key="ContentedComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template" Value="{StaticResource ContentedComboBoxItemTemplate}" />
+    </Style>
+
+    <!--Шаблон выпадающего списка-->
+    <ControlTemplate x:Key="ContentedComboBoxTemplate" TargetType="{x:Type ComboBox}">
+        <Grid x:Name="grid1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="30" />
+            </Grid.ColumnDefinitions>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="MouseOver" >
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="BorderBrush.Color"
+                                            To="{Binding Path=Color, Source={StaticResource CB_Border_Border_Active}}" 
+                                            Duration="0:0:0"/>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="EditStates">
+                    <VisualState x:Name="Editable" />
+                    <VisualState x:Name="Uneditable" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="Border" 
+                    Grid.ColumnSpan="2"
+                    BorderThickness="1"
+                    Background="{StaticResource CB_Border_Bg}"
+                    BorderBrush="{StaticResource CB_Border_Border_Default}"/>
+            <ToggleButton x:Name="ToggleButton"
+                          Grid.Column="1"
+                          Template="{StaticResource ContentedComboBoxToggleButtonTemplate}"                          
+                          Focusable="False"
+                          ClickMode="Press"
+                          Margin="1"
+                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+            <ContentPresenter x:Name="ContentSite"
+                              Grid.Column="0"
+                              IsHitTestVisible="False"
+                              Content="{TemplateBinding SelectionBoxItem}"
+                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                              Margin="3,3,3,3"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center" />
+            <TextBox x:Name="PART_EditableTextBox"
+                   Style="{x:Null}"
+                   Template="{StaticResource ComboBoxTextBoxTemplate}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Margin="3,3,23,3"
+                   Focusable="True"
+                   Background="Transparent"
+                   Visibility="Hidden"
+                   IsReadOnly="{TemplateBinding IsReadOnly}" />
+            <Popup x:Name="Popup"
+                   Placement="Bottom"
+                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                   Focusable="False"
+                   PopupAnimation="Slide">
+                <Grid x:Name="DropDown"
+                      SnapsToDevicePixels="True"
+                      MinWidth="{TemplateBinding ActualWidth}"
+                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                    <Border x:Name="DropDownBorder"
+                            BorderThickness="1,1,1,1"
+                            Background="{StaticResource CB_DropDownBorder_Bg}"
+                            BorderBrush="{StaticResource CB_DropDownBorder_Border}"/>
+                    <ScrollViewer 
+                        Margin="1"
+                        SnapsToDevicePixels="True">
+                        <StackPanel 
+                            IsItemsHost="True"
+                            KeyboardNavigation.DirectionalNavigation="Contained" 
+                            HorizontalAlignment="Stretch"/>
+                    </ScrollViewer>
+                </Grid>
+            </Popup>            
+        </Grid>
+        <!--<ControlTemplate.Triggers>
+            <Trigger SourceName="Border" Property="IsMouseOver" Value="True">
+                <Setter TargetName="ToggleButton" Property="MouseOver" Value="True" />
+            </Trigger>
+        </ControlTemplate.Triggers>-->
+    </ControlTemplate>
+
+    <Style x:Key="ContentedComboBoxStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="SnapsToDevicePixels"  Value="True" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ContentedComboBoxItemStyle}" />
+        <Setter Property="Template" Value="{StaticResource ContentedComboBoxTemplate}" />
+    </Style>
+    
+</ResourceDictionary>

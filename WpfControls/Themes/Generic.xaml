@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:cel="clr-namespace:WpfControls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/WpfControls;component/Styles/CloseableTabItemStyle.xaml" />
+        <ResourceDictionary Source="/WpfControls;component/Styles/CloseableWrapperStyle.xaml" />
+        <ResourceDictionary Source="/WpfControls;component/Styles/NumericUpDownStyle.xaml" />
+        <ResourceDictionary Source="/WpfControls;component/Styles/OneStateButtonStyle.xaml" />
+        <ResourceDictionary Source="/WpfControls;component/Styles/OnOffSwitcherStyle.xaml" />
+        <ResourceDictionary Source="/WpfControls;component/Styles/PropertyButtonStyle.xaml" />
+        <ResourceDictionary Source="/WpfControls;component/Styles/SliderSwitcherStyle.xaml" />
+        <ResourceDictionary Source="/WpfControls;component/Styles/TwoStateButtonStyle.xaml" />
+        <ResourceDictionary Source="/WpfControls;component/Styles/PSComboBoxStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

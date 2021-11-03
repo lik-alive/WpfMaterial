@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="PropertyPanelTemplate" TargetType="{x:Type UserControl}">
+        <Grid>
+            <Border x:Name="PART_Border" Width="Auto" Height="Auto"
+                            Background="#DFDFDF" BorderThickness="0" Padding="0">
+                <Grid HorizontalAlignment="Stretch" Background="Transparent" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Height="16" Grid.Row="0" Background="#000000">
+                        <TextBlock Grid.Row="0" x:Name="PanelName" Grid.Column="0" Margin="3,0,0,0" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Foreground="#FFFFFF" />
+                    </Grid>
+                    <StackPanel Grid.Row="1" Margin="5" Background="#F5F5F5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <ContentPresenter  />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="PropertyPanelStyle" TargetType="{x:Type UserControl}">
+        <Setter Property="Template" Value="{StaticResource PropertyPanelTemplate}" />
+    </Style>
+
+</ResourceDictionary>

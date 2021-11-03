@@ -1,0 +1,33 @@
+﻿<ResourceDictionary 
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:cel="clr-namespace:WpfControls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/WpfStyles;component/TitleBarButtonStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <ControlTemplate x:Key="CloseableWrapperTemplate" TargetType="{x:Type cel:CloseableWrapper}">
+        <Grid>
+            <ContentPresenter />
+            <Button x:Name="CloseButton" ToolTip="Закрыть"
+                                            HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Background="#AAAAAA"
+                                            Style="{DynamicResource TitleBarButtonStyle}" Command="cel:CloseableWrapper.Close">
+                <Grid MaxHeight="9" MaxWidth="9">
+                    <Path Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
+                                                    StrokeThickness="1.5" Stretch="None"
+                                                    Data="M0,0 L9,9 M0,9 L9,0"/>
+                </Grid>
+            </Button>
+        </Grid>
+        <ControlTemplate.Triggers>
+            
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <Style TargetType="{x:Type cel:CloseableWrapper}">        
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template" Value="{StaticResource CloseableWrapperTemplate}"/>
+    </Style>
+
+</ResourceDictionary>

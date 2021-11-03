@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <!--Основной цвет окна (подложка)-->
+    <Color x:Key="MainBGColor">#FFEFEFEF</Color>
+    <!--Основной цвет обводки окна-->
+    <Color x:Key="MainBorderColor">#FF0000FF</Color>
+    
+    
+    <!--Цвет рамки активной панели-->
+    <Color x:Key="ActiveElementBorderColor">#FF000000</Color>
+    <!--Цвет рамки неактивной панели-->
+    <Color x:Key="InActiveElementBorderColor">#FFCCCCCC</Color>
+
+    <!--Цвет фона активного элемента-->
+    <Color x:Key="ActiveElementBgColor">#FF000000</Color>
+    <!--Цвет фона неактивного элемента-->
+    <Color x:Key="InActiveElementBgColor">#FFEEEEEE</Color>
+
+    <!--Цвет фона активного рисованного элемента-->
+    <Color x:Key="ActiveDrawElementFillColor">#FFFFFFFF</Color>
+    <!--Цвет фона неактивного рисованного элемента-->
+    <Color x:Key="InActiveDrawElementFillColor">#FF000000</Color>    
+
+    <!--Цвет подложки для текста-->
+    <Color x:Key="TextBackgroundColor">#FFFFFFFF</Color>
+                
+</ResourceDictionary>

@@ -1,0 +1,31 @@
+﻿<ResourceDictionary 
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:cel="clr-namespace:WpfControls">
+
+    <ControlTemplate x:Key="OneStateButtonTemplate" TargetType="{x:Type cel:OneStateButton}">
+        <Grid>
+            <Border x:Name="PART_border" Background="Transparent" />
+            <Image x:Name="PART_image" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DefaultIcon}" />
+            <TextBlock x:Name="PART_text" Foreground="#000000" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_border" Property="Background" Value="#AAAAAA"/>
+                <Setter TargetName="PART_border" Property="Opacity" Value="0.8" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="PART_image" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PressedIcon}" />
+                <Setter TargetName="PART_border" Property="Background" Value="#000000"/>
+                <Setter TargetName="PART_border" Property="Opacity" Value="1" />
+                <Setter TargetName="PART_text" Property="Foreground" Value="#FFFFFF" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <Style TargetType="{x:Type cel:OneStateButton}">
+        <Setter Property="Template" Value="{StaticResource OneStateButtonTemplate}"/>
+    </Style>
+
+</ResourceDictionary>

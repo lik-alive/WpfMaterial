@@ -1,0 +1,55 @@
+﻿<ResourceDictionary 
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:cel="clr-namespace:WpfControls">
+
+    <ControlTemplate x:Key="PropertyButtonTemplate" TargetType="{x:Type cel:PropertyButton}">
+        <Grid>
+            <Border x:Name="PART_border" Background="Transparent">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <Rectangle x:Name="PART_rect_u" Margin="0,0,0,0" HorizontalAlignment="Stretch"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,1,0,2">                            
+                            <Image x:Name="PART_image" Margin="0,0,3,0" Width="16" Height="16" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DefaultIcon}" />
+                            <ContentPresenter />
+                        </StackPanel>
+                        <Rectangle x:Name="PART_rect_l" Margin="0,0,0,0" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsUpper" Value="True">
+                <Setter TargetName="PART_rect_u" Property="Height" Value="0"/>
+                <Setter TargetName="PART_rect_l" Property="Height" Value="7"/>
+            </Trigger>
+            <Trigger Property="IsUpper" Value="False">
+                <Setter TargetName="PART_rect_u" Property="Height" Value="7"/>
+                <Setter TargetName="PART_rect_l" Property="Height" Value="0"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="PART_rect_u" Property="Fill" Value="#000000" />
+                <Setter TargetName="PART_rect_l" Property="Fill" Value="#000000" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="False">
+                <Setter TargetName="PART_rect_u" Property="Fill" Value="#AAAAAA" />
+                <Setter TargetName="PART_rect_l" Property="Fill" Value="#AAAAAA" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_rect_u" Property="Fill" Value="#000000" />
+                <Setter TargetName="PART_rect_l" Property="Fill" Value="#000000" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                
+                <Setter TargetName="PART_rect_u" Property="Fill" Value="#000000" />
+                <Setter TargetName="PART_rect_l" Property="Fill" Value="#000000" />
+                <Setter TargetName="PART_image" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PressedIcon}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type cel:PropertyButton}">
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Template" Value="{StaticResource PropertyButtonTemplate}" />        
+    </Style>
+</ResourceDictionary>
