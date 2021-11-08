@@ -3,8 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ButtonStylePrev" Height="300" Width="300">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="48,116,0,0" VerticalAlignment="Top" Height="54" Width="113"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="189,116,0,0" VerticalAlignment="Top" Height="54" IsEnabled="False" />
-
+        <Button Content="Button" HorizontalAlignment="Left" Margin="28,46,0,0" VerticalAlignment="Top" Height="54" Width="113"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="188,46,0,0" VerticalAlignment="Top" Height="54" IsEnabled="False" />
+        <Button Margin="70,105,72,10" Width="150" BorderThickness="0" Padding="0" Cursor="Hand" >
+            <Grid Margin="0" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Test" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Padding="0"/>
+                <TextBlock MaxHeight="50" Grid.Row="1" Text="Teeeesdfa d asd asd asd as d" TextWrapping="Wrap" FontSize="12" Foreground="#555" VerticalAlignment="Top" />
+            </Grid>
+        </Button>
     </Grid>
 </Window>

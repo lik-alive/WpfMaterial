@@ -27,19 +27,24 @@
                         </Storyboard>
                     </VisualState>
                 </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>            
-            <Border x:Name="PART_Track" Background="White" BorderBrush="Black" BorderThickness="1" />
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="PART_Track" Background="{TemplateBinding Foreground}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
             <Grid x:Name="Animation" ClipToBounds="True">
-                <Border x:Name="PART_GlowRect" Width="{TemplateBinding ActualWidth}" Background="Transparent" BorderThickness="0,1,0,1" BorderBrush="Black" HorizontalAlignment="Left" >
-                    <Border Background="Black" Margin="0,2,0,2" />
+                <Border x:Name="PART_GlowRect" Width="{TemplateBinding ActualWidth}" Background="Transparent" BorderThickness="0,1,0,1" BorderBrush="{TemplateBinding BorderBrush}" HorizontalAlignment="Left" >
+                    <Border Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=BorderBrush}" Margin="0,2,0,2" />
                 </Border>
             </Grid>
-            <Border x:Name="PART_Indicator" Background="Black" Margin="2,3,2,3" HorizontalAlignment="Left" />            
+            <Border x:Name="PART_Indicator" Background="{TemplateBinding Background}" Margin="0" HorizontalAlignment="Left">
+            </Border>            
         </Grid>
     </ControlTemplate>
 
     <Style TargetType="{x:Type ProgressBar}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=BorderBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template" Value="{StaticResource ProgressBarTemplate}"/>
     </Style>
 

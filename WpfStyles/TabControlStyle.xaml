@@ -34,7 +34,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TabPanel Name="HeaderPanel" Grid.Row="0" Panel.ZIndex="1" Margin="0,0,0,0"  IsItemsHost="True" Background="#EFEFEF" />
-            <Border Name="Border" Grid.Row="1" Background="{TemplateBinding Background}" BorderThickness="0,2,0,0" BorderBrush="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=BorderBrush}" >
+            <Border Name="Border" Grid.Row="1" Background="{TemplateBinding Background}" BorderThickness="0,2,0,0" BorderBrush="{TemplateBinding BorderBrush}" >
                 <ContentPresenter Name="PART_SelectedContentHost" Margin="4" ContentSource="SelectedContent" />
             </Border>
         </Grid>
@@ -44,6 +44,7 @@
         <Setter Property="Template" Value="{StaticResource TabControlTemplate}" />
         <Setter Property="Background" Value="#F0F0F0" />
         <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=BorderBrush}" />
     </Style>
 
 

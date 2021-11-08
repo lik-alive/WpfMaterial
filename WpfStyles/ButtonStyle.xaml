@@ -34,7 +34,7 @@
             <Border x:Name="MouseOverBorder" BorderBrush="#000000" Background="#FFFFFF" Opacity="0" BorderThickness="{TemplateBinding BorderThickness}" />
             <Border x:Name="PressedBorder" BorderBrush="#000000" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=BorderBrush}" Opacity="0" />
             <Border x:Name="DisabledBorder" BorderBrush="#000000" Background="#EEEEEE" Opacity="0" BorderThickness="{TemplateBinding BorderThickness}" />
-            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0"/>
+            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="{TemplateBinding Padding}"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsPressed" Value="True">
@@ -51,6 +51,7 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="Background" Value="#EFEFEF" />
+        <Setter Property="Padding" Value="10,0" />
     </Style>
 
 </ResourceDictionary>
