@@ -1,0 +1,8 @@
+﻿<Window x:Class="WpfMaterial.Preview.TextBoxStylePrev"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TextBoxStylePrev" Height="300" Width="300">
+    <Grid>
+        <TextBox Width="100" Height="20" Text="test" />        
+    </Grid>
+</Window>

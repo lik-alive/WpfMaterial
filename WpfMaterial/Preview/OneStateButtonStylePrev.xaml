@@ -1,0 +1,12 @@
+﻿<Window x:Class="WpfMaterial.Preview.OneStateButtonStylePrev"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cel="clr-namespace:WpfControls;assembly=WpfControls"        
+        Title="OneStateButtonStylePrev" Height="254" Width="174">
+    <Grid Background="#DDDDDD" SnapsToDevicePixels="True" ClipToBounds="True">
+        <StackPanel SnapsToDevicePixels="True" ClipToBounds="True">
+            <cel:OneStateButton x:Name="uriButton" Width="100" Height="100" IconURI="/WpfMaterial;component/Preview/Icons/icon1.ico" Background="#AAAAAA" />
+            <cel:OneStateButton x:Name="sourceButton" Width="100" Height="100" Background="#AAAAAA" IsGrayscale="False" />
+        </StackPanel>
+    </Grid>
+</Window>

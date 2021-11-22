@@ -1,9 +1,0 @@
-﻿<Window x:Class="WpfResources.Preview.SliderSwitcherPrev"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:cel="clr-namespace:WpfControls;assembly=WpfControls"
-        Title="SliderSwitcherPrev" Height="300" Width="300">
-    <Grid>
-        <cel:SliderSwitcher Width="100" Height="30" TextOn="On" TextOff="Off" />
-    </Grid>
-</Window>

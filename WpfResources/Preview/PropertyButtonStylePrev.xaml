@@ -1,9 +1,0 @@
-﻿<Window x:Class="WpfResources.Preview.PropertyButtonStylePrev"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:cel="clr-namespace:WpfControls;assembly=WpfControls"
-        Title="PropertyButtonStylePrev" Height="300" Width="300">
-    <Grid Background="#DDDDDD">
-        <cel:PropertyButton Width="200" IsUpper="False" Content="Property" IconURI="/WpfResources;component/Preview/Icons/icon1.ico" IsSelected="True" Background="#AAAAAA" />
-    </Grid>
-</Window>

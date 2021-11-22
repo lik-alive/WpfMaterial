@@ -1,0 +1,13 @@
+﻿<Window x:Class="WpfMaterial.Preview.OptionWindowStylePrev"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="OptionWindowPrev" Height="425.088" Width="412.367" Icon="/WpfMaterial;component/Preview/Icons/icon1.ico">
+    <Window.Style>
+        <DynamicResource ResourceKey="OptionWindowStyle" />
+    </Window.Style>
+    <Grid>
+        <StatusBar>
+            <TextBlock Text="asdasd" />
+        </StatusBar>
+    </Grid>
+</Window>
