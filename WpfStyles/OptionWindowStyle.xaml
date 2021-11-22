@@ -9,10 +9,7 @@
 
     <ControlTemplate x:Key="OptionWindowTemplate" TargetType="{x:Type Window}">
         <Grid x:Name="mainGrid" TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display">
-            <Border x:Name="PART_Border" Width="Auto" Height="Auto" Background="#EFEFEF" BorderBrush="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=BorderBrush}" BorderThickness="1" Padding="0" >
-                <Border.Effect>
-                    <DropShadowEffect Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=BorderBrush}" Opacity="0.7" BlurRadius="7" ShadowDepth="0" Direction="0"/>
-                </Border.Effect>
+            <Border x:Name="PART_Border" Width="Auto" Height="Auto" Background="#EFEFEF" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Padding="0" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />
