@@ -26,7 +26,7 @@ The WpfMaterial is distributed as two dlls (see the Release section).
 - New components: on/off switches, closable tab items, etc.
 - Aero snap for windows including multi-display support
 - Simple integration with WPF application
-- Metro like interface for all versions of Windows OS
+- Metro style interface for all Windows OS versions (7 and above)
 
 ## Installation
 
