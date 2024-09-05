@@ -15,7 +15,7 @@
                         <RowDefinition Height="40" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Border x:Name="TitleBar" Grid.Row="0" VerticalAlignment="Top" Background="#EFEFEF" BorderThickness="0" MouseLeftButtonDown="TitleBarMouseLeftButtonDown" MouseMove="TitleBarMouseMove">
+                    <Border x:Name="TitleBar" Grid.Row="0" VerticalAlignment="Top" Background="#EFEFEF" BorderThickness="0">
                         <Grid Height="40">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -31,6 +31,7 @@
                                             Text="{TemplateBinding Title}"/>
                             <Button x:Name="CloseButton" Grid.Column="2" ToolTip="Закрыть"
                                             VerticalAlignment="Top" Width="34" Height="26" Background="Transparent"
+                                            WindowChrome.IsHitTestVisibleInChrome="True"
                                             Style="{DynamicResource TitleBarButtonStyle}" Click="CloseButtonClick">
                                 <Grid MaxHeight="9" MaxWidth="9">
                                     <Path Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
@@ -41,17 +42,9 @@
                         </Grid>
                     </Border>
                     <ContentPresenter Grid.Row="1" />
-                    <ResizeGrip x:Name="ResizeIcon" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.8" />
                 </Grid>
             </Border>
-            <Rectangle x:Name="ResizeCursor" MouseDown="OnSizeSouthEast" Cursor="SizeNWSE" Fill="Transparent" Width="22" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
         </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="ResizeMode" Value="NoResize">
-                <Setter TargetName="ResizeCursor" Property="Visibility" Value="Hidden" />
-                <Setter TargetName="ResizeIcon" Property="Visibility" Value="Hidden" />
-            </Trigger>
-        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style x:Key="OptionWindowStyle" TargetType="{x:Type Window}">
@@ -59,5 +52,10 @@
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CaptionHeight="38" />
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

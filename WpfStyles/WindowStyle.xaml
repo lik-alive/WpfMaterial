@@ -8,7 +8,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="WindowTemplate" TargetType="{x:Type Window}">
-        <Grid x:Name="mainGrid" Margin="7" TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display">
+        <Grid x:Name="mainGrid" Margin="7" TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display" SizeChanged="SizeChanged">
             <Border x:Name="PART_Border" Width="Auto" Height="Auto" Background="#EFEFEF" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Padding="0">
                 <Border.Effect>
                     <DropShadowEffect Color="{TemplateBinding BorderBrush}" Opacity="0.7" BlurRadius="7" ShadowDepth="0" Direction="0"/>
@@ -18,14 +18,14 @@
                         <RowDefinition Height="40" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Border x:Name="TitleBar" Grid.Row="0" VerticalAlignment="Top" Background="#EFEFEF" BorderThickness="0" MouseLeftButtonDown="TitleBarMouseLeftButtonDown" MouseMove="TitleBarMouseMove">
+                    <Border x:Name="TitleBar" Grid.Row="0" VerticalAlignment="Top" Background="#EFEFEF" BorderThickness="0">
                         <Grid Height="40">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition />
-                                <ColumnDefinition Width="34"/>
-                                <ColumnDefinition Width="34"/>
-                                <ColumnDefinition Width="34"/>
+                                <ColumnDefinition Width="46"/>
+                                <ColumnDefinition Width="46"/>
+                                <ColumnDefinition Width="46"/>
                             </Grid.ColumnDefinitions>
                             <Image x:Name="Icon" Grid.Column="0"
                                             Source="{TemplateBinding Icon}" 
@@ -35,57 +35,66 @@
                                             Margin="10,0,0,0" FontFamily="Segoe UI" FontSize="{TemplateBinding FontSize}" Opacity="0.77" FontWeight="Bold" 
                                             Text="{TemplateBinding Title}"/>
                             <Button x:Name="MinButton" Grid.Column="2" ToolTip="Свернуть"
-                                            VerticalAlignment="Top" Width="34" Height="26" Background="Transparent"
+                                            VerticalAlignment="Top" Width="Auto" Height="30" Background="Transparent" 
+                                            WindowChrome.IsHitTestVisibleInChrome="True"
                                             Style="{DynamicResource TitleBarButtonStyle}" Click="MinButtonClick">
-                                <Grid MaxHeight="9" MaxWidth="9">
+                                <Grid MaxHeight="10" MaxWidth="10">
                                     <Path Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
                                                     StrokeThickness="1" Stretch="None" RenderOptions.EdgeMode="Aliased"
-                                                    Data="M0,8 H8 M0,7 H8 M0,6 H8"/>
+                                                    Data="M0,5 H10"/>
                                 </Grid>
                             </Button>
                             <Button x:Name="MaxButton" Grid.Column="3" ToolTip="Развернуть"
-                                            VerticalAlignment="Top" Width="34" Height="26" Background="Transparent"
+                                            VerticalAlignment="Top" Width="Auto" Height="30" Background="Transparent"
+                                            WindowChrome.IsHitTestVisibleInChrome="True"
                                             Style="{DynamicResource TitleBarButtonStyle}" Click="MaxButtonClick">
-                                <Grid MaxHeight="9" MaxWidth="9">
+                                <Grid MaxHeight="10" MaxWidth="10">
                                     <Path x:Name="PART_MaxButton_Path"
                                                     Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
                                                     StrokeThickness="1" Stretch="None" RenderOptions.EdgeMode="Aliased"
-                                                    Data="M0,0 H8 V8 H0 V0 M0,1 H8 M0,2 H8"/>
+                                                    Data="M0.1,0.1 V10 H10 V0.1 H0.1"/>
                                 </Grid>
                             </Button>
                             <Button x:Name="CloseButton" Grid.Column="4" ToolTip="Закрыть"
-                                            VerticalAlignment="Top" Width="34" Height="26" Background="Transparent"
+                                            VerticalAlignment="Top" Width="Auto" Height="30" Background="Transparent"
+                                            WindowChrome.IsHitTestVisibleInChrome="True"
                                             Style="{DynamicResource TitleBarButtonStyle}" Click="CloseButtonClick">
-                                <Grid MaxHeight="9" MaxWidth="9">
+                                <Grid MaxHeight="10" MaxWidth="10">
                                     <Path Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
-                                                    StrokeThickness="1.5" Stretch="None"
-                                                    Data="M0,0 L8,8 M0,8 L8,0"/>
+                                                    StrokeThickness="0.8" Stretch="None"
+                                                    Data="M0,0 L10,10 M0,10 L10,0"/>
                                 </Grid>
                             </Button>
                         </Grid>
                     </Border>
                     <ContentPresenter Grid.Row="1" />
-                    <ResizeGrip Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.8" Focusable="False" />
                 </Grid>                
             </Border>
-            <Rectangle MouseDown="OnSizeSouthEast" Cursor="SizeNWSE" Fill="Transparent" Width="22" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="WindowState" Value="Maximized">
-                <Setter TargetName="PART_MaxButton_Path" Property="Data" Value="M0,3 H5 V8 H0 V3 M0,4 H5 M3,0 H8 V5 H7 M3,1 H8"/>
+                <Setter TargetName="MaxButton" Property="ToolTip" Value="Свернуть в окно"/>
+                <Setter TargetName="PART_MaxButton_Path" Property="Data" Value="M0.1,3 V10 H8 V3 H0.1 M3,3 V0.1 H10 V8 H8"/>
                 <Setter TargetName="mainGrid" Property="Margin" Value="0"/>
-                <Setter TargetName="PART_Border" Property="BorderThickness" Value="0"/>
+                <Setter TargetName="PART_Border" Property="BorderThickness" Value="7,7,7,0"/>
+                <Setter TargetName="PART_Border" Property="BorderBrush" Value="Transparent"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="WindowStyle" TargetType="{x:Type Window}">        
+    <Style x:Key="WindowStyle" TargetType="{x:Type Window}">
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="ResizeMode" Value="NoResize" />
         <Setter Property="AllowsTransparency" Value="True" />
         <Setter Property="Template" Value="{DynamicResource WindowTemplate}" />
         <Setter Property="BorderBrush" Value="#000000" />
         <Setter Property="FontSize" Value="16" />
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CaptionHeight="38"
+                GlassFrameThickness="100"
+                ResizeBorderThickness="7" />
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

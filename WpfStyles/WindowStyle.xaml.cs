@@ -18,42 +18,16 @@ namespace WpfStyles
 {
     internal static class LocalExtensions
     {
-        public static void ForWindowFromChild(this object childDependencyObject, Action<Window> action)
-        {
-            var element = childDependencyObject as DependencyObject;
-            while (element != null)
-            {
-                element = VisualTreeHelper.GetParent(element);
-                if (element is Window) { action(element as Window); break; }
-            }
-        }
-
         public static void ForWindowFromTemplate(this object templateFrameworkElement, Action<Window> action)
         {
             Window window = ((FrameworkElement)templateFrameworkElement).TemplatedParent as Window;
             if (window != null) action(window);
         }
-
-        public static IntPtr GetWindowHandle(this Window window)
-        {
-            WindowInteropHelper helper = new WindowInteropHelper(window);
-            return helper.Handle;
-        }
-
-        public static void ForTabControlFromTemplate(this object templateFrameworkElement, Action<TabControl> action)
-        {
-            TabControl tabControl = ((FrameworkElement)templateFrameworkElement).TemplatedParent as TabControl;
-            if (tabControl != null) action(tabControl);
-        }
     }
 
     public partial class WindowStyle
     {
-        #region sizing event handlers
-
-        private Boolean dragWindow = false;
-
-        private Boolean doubleClick = false;
+        #region event handlers
 
         void CloseButtonClick(object sender, RoutedEventArgs e)
         {   
@@ -67,82 +41,27 @@ namespace WpfStyles
 
         void MaxButtonClick(object sender, RoutedEventArgs e)
         {
-            sender.ForWindowFromTemplate(w => w.WindowState = (w.WindowState == WindowState.Maximized) ? WindowState.Normal : WindowState.Maximized);
+            sender.ForWindowFromTemplate(w => {
+                w.MaxHeight = Int32.MaxValue;
+                w.WindowState = (w.WindowState == WindowState.Maximized) ? WindowState.Normal : WindowState.Maximized;
+            });
         }
 
-        void TitleBarMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        void SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (e.ClickCount > 1)
-            {
-                doubleClick = true;
-                MaxButtonClick(sender, e);
-            }
-            else if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                dragWindow = true;
-                sender.ForWindowFromTemplate(w =>
+            double height = (sender as Grid).ActualHeight;
+            sender.ForWindowFromTemplate(w => {
+                if (w.WindowState == WindowState.Maximized)
                 {
-                    if (w.WindowState == WindowState.Normal)
+                    if (w.MaxHeight == Double.PositiveInfinity)
                     {
-                        w.DragMove();
-                        if (w.PointToScreen(e.GetPosition(null)).Y < 2)
-                        {
-                            w.BeginInit();
-                            w.WindowState = WindowState.Maximized;
-                            w.EndInit();
-                        }
+                        int offset = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height - System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Height;
+                        w.MaxHeight = height - offset - 7;
                     }
-                });
-            }
-        }
-        
-        void TitleBarMouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed && !doubleClick)
-            {
-                sender.ForWindowFromTemplate(w =>
-                {
-                    if (w.WindowState == WindowState.Maximized)
-                    {
-                        if (w.PointToScreen(e.GetPosition(null)).Y > 10)
-                        {
-                            w.BeginInit();
-                            double fullWidth = w.ActualWidth;                            
-                            double fullX = w.PointToScreen(e.GetPosition(null)).X;
-                            double fullY = w.PointToScreen(e.GetPosition(null)).Y;
-                            w.WindowState = WindowState.Normal;
-                            double smallWidth = w.ActualWidth;
-                            double smallX = fullX / fullWidth * smallWidth;
-                            if ((fullX < fullWidth / 3.0) && (fullX < smallWidth / 2.0)) w.Left = 0;
-                            else if ((fullX > fullWidth * 2 / 3.0) && (fullX > fullWidth - smallWidth / 2.0)) w.Left = fullWidth - smallWidth;
-                            else w.Left = fullX - smallX;
-                            w.Top = fullY - 10;
-                            w.EndInit();                            
-                            w.DragMove();
-                            if (w.PointToScreen(e.GetPosition(null)).Y < 2)
-                            {
-                                w.BeginInit();
-                                w.WindowState = WindowState.Maximized;
-                                w.EndInit();
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        void OnSizeSouthEast(object sender, MouseButtonEventArgs e) 
-        {
-            if (Mouse.LeftButton == MouseButtonState.Pressed)
-            {
-                sender.ForWindowFromTemplate(w =>
-                {
-                    w.Cursor = Cursors.SizeNWSE;
-                    if (w.WindowState == WindowState.Normal)
-                        DragSize(w.GetWindowHandle());
-                    w.Cursor = Cursors.Arrow;
-                });
-            }
+                    
+                }
+                else w.MaxHeight = Double.PositiveInfinity;
+            });
         }
 
         #endregion

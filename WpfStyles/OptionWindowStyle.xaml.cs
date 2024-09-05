@@ -18,96 +18,11 @@ namespace WpfStyles
 {
     public partial class OptionWindowStyle
     {
-        #region sizing event handlers
-
-        private Boolean dragWindow = false;
-
-        private Boolean doubleClick = false;
+        #region event handlers
 
         void CloseButtonClick(object sender, RoutedEventArgs e)
         {   
             sender.ForWindowFromTemplate(w => w.Close());
-        }
-
-        void TitleBarMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount > 1)
-            {
-                doubleClick = true;
-                sender.ForWindowFromTemplate(w =>
-                {
-                    if (w.ResizeMode != ResizeMode.NoResize)
-                        w.WindowState = (w.WindowState == WindowState.Maximized) ? WindowState.Normal : WindowState.Maximized;
-                });
-            }
-            else if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                dragWindow = true;
-                sender.ForWindowFromTemplate(w =>
-                {
-                    if (w.WindowState == WindowState.Normal)
-                    {
-                        w.DragMove();
-                        if ((w.ResizeMode != ResizeMode.NoResize) && 
-                            (w.PointToScreen(e.GetPosition(null)).Y < 2))
-                        {
-                            w.BeginInit();
-                            w.WindowState = WindowState.Maximized;
-                            w.EndInit();
-                        }
-                    }
-                });
-            }
-        }
-
-        void TitleBarMouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed && !doubleClick)
-            {
-                sender.ForWindowFromTemplate(w =>
-                {
-                    if (w.WindowState == WindowState.Maximized)
-                    {
-                        if (w.PointToScreen(e.GetPosition(null)).Y > 10)
-                        {
-                            w.BeginInit();
-                            double fullWidth = w.ActualWidth;
-                            double fullX = w.PointToScreen(e.GetPosition(null)).X;
-                            double fullY = w.PointToScreen(e.GetPosition(null)).Y;
-                            w.WindowState = WindowState.Normal;
-                            double smallWidth = w.ActualWidth;
-                            double smallX = fullX / fullWidth * smallWidth;
-                            if ((fullX < fullWidth / 3.0) && (fullX < smallWidth / 2.0)) w.Left = 0;
-                            else if ((fullX > fullWidth * 2 / 3.0) && (fullX > fullWidth - smallWidth / 2.0)) w.Left = fullWidth - smallWidth;
-                            else w.Left = fullX - smallX;
-                            w.Top = fullY - 10;
-                            w.EndInit();
-                            w.DragMove();
-                            if ((w.ResizeMode != ResizeMode.NoResize) && 
-                                (w.PointToScreen(e.GetPosition(null)).Y < 2))
-                            {
-                                w.BeginInit();
-                                w.WindowState = WindowState.Maximized;
-                                w.EndInit();
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        void OnSizeSouthEast(object sender, MouseButtonEventArgs e) 
-        {
-            if (Mouse.LeftButton == MouseButtonState.Pressed)
-            {
-                sender.ForWindowFromTemplate(w =>
-                {
-                    w.Cursor = Cursors.SizeNWSE;
-                    if (w.WindowState == WindowState.Normal)
-                        DragSize(w.GetWindowHandle());
-                    w.Cursor = Cursors.Arrow;
-                });
-            }
         }
 
         #endregion
